@@ -71,3 +71,103 @@ body{
 
 
  }
+
+
+
+.react-datepicker {
+  border: 2px solid #fdfeffc9; /* Custom border color */
+  border-radius: 8px; /* Custom border radius */
+  box-shadow: 0px 4px 8px rgba(138, 137, 137, 0.2);
+}
+
+.react-datepicker__header {
+  background-color: #fdfeffc9; /* Change header background */
+  color: #fff; /* Change header text color */
+  border-bottom: 0px solid white;
+}
+
+.react-datepicker__day--selected {
+  background-color: #13c296; /* Change selected day background */
+  color: #fff; /* Change selected day text color */
+}
+
+.react-datepicker__day--today {
+  font-weight: bold;
+  color: #e10e0e; /* Highlight today's date */
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #d97706; /* Change keyboard-selected background */
+  color: #fff;
+}
+.react-datepicker__navigation{
+  /* border: 1px solid rgba(167, 166, 166, 0.329); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  width: 1.5rem;
+  height: 1.5rem
+}
+/* .react-datepicker__input-container{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: 2px solid black;
+    padding: 2px;
+    padding-left: 8px;
+    border-radius: 4px;
+  } */
+ 
+  .react-datepicker__input-container input{
+    border: 0.5px solid rgba(128, 128, 128, 0.37);
+    padding-left: 1.7rem;
+    border-radius: .1875rem;
+ 
+  }
+  .react-datepicker__input-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: .5rem;
+}
+
+  .react-datepicker-wrapper input:focus {
+    border-color: rgba(128, 128, 128, 0.37);
+    outline: none;
+    
+  }
+
+  .react-datepicker__navigation-icon--next{
+
+  }
+
+  .react-datepicker__navigation-icon{
+
+
+  }
+
+  .datepicker__navigation-icon::before{
+
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 3px 3px 0 0;
+  content: "";
+  display: block;
+  height: 9px;
+  position: absolute;
+  top: 8px;
+  width: 9px;
+
+  }
+
+  .react-datepicker__navigation-icon--next::before{
+    transform: rotate(45deg);
+    left: -4px;
+  }
+  .react-datepicker__navigation-icon--previous::before{
+
+    transform: rotate(225deg);
+    right: -4px;
+  }
