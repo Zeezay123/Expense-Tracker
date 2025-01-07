@@ -7,7 +7,10 @@ import {
 } from "react-icons/fa6";
 import { MdDateRange } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight,FaLongArrowAltUp  } from "react-icons/fa";
+import { CiBellOn } from "react-icons/ci";
+import { HiChevronDown } from "react-icons/hi";
+import { RxDividerVertical } from "react-icons/rx";
 
 
 
@@ -21,6 +24,10 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
         addbutton: <IoIosAddCircleOutline size={20} />,
         leftarr: <FaChevronLeft size={18} />,
         rightarr: <FaChevronRight size={18} />,
+        notBell: <CiBellOn size={20} />,
+        cheDown: <HiChevronDown size={14} />,
+        vertDiv: <RxDividerVertical size={30} />,
+        upArrow: <FaLongArrowAltUp size={12} />,
       };
     
 

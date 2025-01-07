@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       colors:{
-        dashcor: '#FCF1FE',
+        dashcor: 'grey',
+        blueOne:'#F1F4FF',
         exIcon: '#E10E0E',
         balIcon: '#1C3FB7',
         inIcon: '#13C296',

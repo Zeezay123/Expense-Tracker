@@ -13,6 +13,7 @@ import AddTrans from "../Components/AddTrans";
 import { Chart } from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import LineChart from "../Components/LineChart";
+import TransCard from "../Components/TransCard";
 
 
 
@@ -119,7 +120,7 @@ setChartData({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'S
   ]
 })
   
-}, [incomeGraphData,expenseGraphData,savingsGraphData])
+}, [chartsData,incomeGraphData,expenseGraphData,savingsGraphData])
 
 
 
@@ -337,6 +338,16 @@ const addTransaction = (newtransaction)=>{
 
 
 
+  let typeSearch = [];
+
+if (isTypeSelected) {
+  typeSearch = (isFiltered || isDateFiltered) ? filteredByDate : dataTab;
+}
+
+  const filteredType = typeSearch.flat().filter((data)=>{ 
+    return data.type.toLowerCase().includes(selectedType.toLowerCase())
+  })
+
 let categorySearch = [];
 
 if(isCategorySelected)
@@ -346,11 +357,6 @@ if(isCategorySelected)
 
 
 
-let typeSearch = [];
-
-if (isTypeSelected) {
-  typeSearch = (isFiltered || isDateFiltered) ? filteredByDate : dataTab;
-}
 
 
 //Aternative
@@ -407,9 +413,6 @@ setDateFilterPage(Array.from({length:num},(_,index)=>( index += 1)))
 
   
 
-const filteredType = typeSearch.flat().filter((data)=>{ 
-  return data.type.toLowerCase().includes(selectedType.toLowerCase())
-})
 
 
 
@@ -470,63 +473,75 @@ useEffect (()=>{
 
 
 
-  const dashboardelement = Dataone.map((data, index) => {
-    return (
-      <div
-        key={index}
-        className={`flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4 
-          ${
-            data.title === "Income"
-              ? "border-green-400"
-              : data.title === "Expenses"
-              ? "border-red-400"
-              : data.title === "Savings"
-              ? "border-yellow-400"
-              : "border-blue-400"
-          }`}
-      >
+  // const dashboardelement = Dataone.map((data, index) => {
+  //   return (
+  //     <div
+  //       key={index}
+  //       className={`flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4 
+  //         ${
+  //           data.title === "Income"
+  //             ? "border-green-400"
+  //             : data.title === "Expenses"
+  //             ? "border-red-400"
+  //             : data.title === "Savings"
+  //             ? "border-yellow-400"
+  //             : "border-blue-400"
+  //         }`}
+  //     >
 
-        <div
-          className={`flex w-10 h-10 border rounded-lg items-center justify-center
-          ${
-            data.title === "Income"
-              ? " bg-green-100"
-              : data.title === "Expenses"
-              ? "bg-red-100"
-              : data.title === "Savings"
-              ? " bg-yellow-100 "
-              : " bg-blue-100 "
-          }`}
-        >
-          {iconMapping[data.icon]}
-        </div>
+  //       <div
+  //         className={`flex w-10 h-10 border rounded-lg items-center justify-center
+  //         ${
+  //           data.title === "Income"
+  //             ? " bg-green-100"
+  //             : data.title === "Expenses"
+  //             ? "bg-red-100"
+  //             : data.title === "Savings"
+  //             ? " bg-yellow-100 "
+  //             : " bg-blue-100 "
+  //         }`}
+  //       >
+  //         {iconMapping[data.icon]}
+  //       </div>
 
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col">
-            <span className=" font-title font-bold text-lg">{data.title}</span>
-            <span className=" font-sans font-black text-lg">{data.amount}</span>
-          </div>
-          <div
-            className={`flex justify-center text-lg  items-center border rounded-full w-20 h-8 
-          ${
-            data.title === "Income"
-              ? "text-green-500 bg-green-100"
-              : data.title === "Expenses"
-              ? "text-red-500 bg-red-100"
-              : data.title === "Savings"
-              ? "text-yellow-500 bg-yellow-100"
-              : "text-blue-500 bg-blue-100"
-          }
-          `}
-          >
-            {data.percentage}
-          </div>
-        </div>
-      </div>
-    );
-  });
+  //       <div className="flex justify-between items-center">
+  //         <div className="flex flex-col">
+  //           <span className=" font-title font-bold text-lg">{data.title}</span>
+  //           <span className=" font-sans font-black text-lg">{data.amount}</span>
+  //         </div>
+  //         <div
+  //           className={`flex justify-center text-lg  items-center border rounded-full w-20 h-8 
+  //         ${
+  //           data.title === "Income"
+  //             ? "text-green-500 bg-green-100"
+  //             : data.title === "Expenses"
+  //             ? "text-red-500 bg-red-100"
+  //             : data.title === "Savings"
+  //             ? "text-yellow-500 bg-yellow-100"
+  //             : "text-blue-500 bg-blue-100"
+  //         }
+  //         `}
+  //         >
+  //           {data.percentage}
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // });
 
-
+const dashboardelement = Dataone.map((data, index) => {
+  return (
+    <TransCard
+      key={index}
+      title={data.title}
+      amount={data.amount}
+      percent={data.percentage}
+      icon={data.icon}
+      gain={data.gains}
+      colr={data.title === 'Balance' ? 'blue' : data.title === 'Income' ? 'green' : data.title === 'Expenses' ? 'red' : 'yellow'}
+    />
+  );
+});
 
 
 
@@ -640,7 +655,7 @@ useEffect (()=>{
   return (
     <div className="relative">
     {isShowAddTrans && (<div><AddTrans addTransaction={addTransaction} toggleAddTrans={toggleAddTrans}/></div>)}
-    <div className="flex  flex-col bg-dashcor pt-12 h-auto">
+    <div className="flex  flex-col bg-gray-50 pt-12 h-auto">
        
       <div className=" flex items-center justify-center gap-10 pl-20 sm:flex-wrap">
         {dashboardelement}
