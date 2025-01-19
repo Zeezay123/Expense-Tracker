@@ -193,30 +193,31 @@ const tableElement = incomeTableData ? incomeTableData.flat().map((data, index) 
 
   
   return (
-    <div className='flex  flex-col bg-dashcor p-12 h-auto gap-10'>
-      <div className='flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4 border-green-400'>
+   <> </>
+    // <div className='flex  flex-col bg-dashcor p-12 h-auto gap-10'>
+    //   <div className='flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4 border-green-400'>
       
-      <div
-          className='flex w-10 h-10 border rounded-lg items-center justify-center bg-green-100'>
-          {iconMapping[Dataone[0].icon]}
-        </div>
+    //   <div
+    //       className='flex w-10 h-10 border rounded-lg items-center justify-center bg-green-100'>
+    //       {iconMapping[Dataone[0].icon]}
+    //     </div>
           
 
           
-        <div className="flex justify-between items-center">
-          <div className="flex flex-col">
-            <span className=" font-title font-bold text-lg">{Dataone[0].title}</span>
-            <span className=" font-sans font-black text-lg">{Dataone[0].amount}</span>
-          </div>
-          <div
-            className='flex justify-center text-lg  items-center border rounded-full w-20 h-8 text-green-500 bg-green-100'
+    //     <div className="flex justify-between items-center">
+    //       <div className="flex flex-col">
+    //         <span className=" font-title font-bold text-lg">{Dataone[0].title}</span>
+    //         <span className=" font-sans font-black text-lg">{Dataone[0].amount}</span>
+    //       </div>
+    //       <div
+    //         className='flex justify-center text-lg  items-center border rounded-full w-20 h-8 text-green-500 bg-green-100'
           
-          >
-            {Dataone[0].percentage}
-          </div>
-        </div>
+    //       >
+    //         {Dataone[0].percentage}
+    //       </div>
+    //     </div>
     
-      </div>
+    //   </div>
       
 
 
@@ -228,90 +229,90 @@ const tableElement = incomeTableData ? incomeTableData.flat().map((data, index) 
 
 
 
-      <div className="flex justify-between items-center min-w-[74rem]">
-          <div>
-            <h2 className="font-title text-2xl font-bold">
-              Recent Transactions
-            </h2>
-            <p className="text-gray-400">
-              Check all you recent transactional activities.
-            </p>
-          </div>
+    //   <div className="flex justify-between items-center min-w-[74rem]">
+    //       <div>
+    //         <h2 className="font-title text-2xl font-bold">
+    //           Recent Transactions
+    //         </h2>
+    //         <p className="text-gray-400">
+    //           Check all you recent transactional activities.
+    //         </p>
+    //       </div>
 
-          {/* onClick={toggleAddTrans} */}
-          <div>
-             <Button bIcon={iconMapping.addbutton} btext={text} />
-            </div>
+    //       {/* onClick={toggleAddTrans} */}
+    //       <div>
+    //          <Button bIcon={iconMapping.addbutton} btext={text} />
+    //         </div>
          
           
-        </div>
+    //     </div>
 
-        <div className="flex items-center justify-between min-w-[74rem] px-5 py-3 bg-white rounded-md relative">
-          <form action="">
-            <input
-              className="flex w-[18.5rem] border-gray-50 border-2  h-[2rem] p-5 rounded-md"
-              type="search"
-              placeholder="search here..."
-              name="search"
-               onChange={(e) => setQuery(e.target.value)}
-               value={query}
-            />
-          </form>
+    //     <div className="flex items-center justify-between min-w-[74rem] px-5 py-3 bg-white rounded-md relative">
+    //       <form action="">
+    //         <input
+    //           className="flex w-[18.5rem] border-gray-50 border-2  h-[2rem] p-5 rounded-md"
+    //           type="search"
+    //           placeholder="search here..."
+    //           name="search"
+    //            onChange={(e) => setQuery(e.target.value)}
+    //            value={query}
+    //         />
+    //       </form>
 
-          <div className="flex gap-28 items-center ">
-            <div className=" flex gap-2 items-center">
-              <div className="flex gap-1 items-center">
-                <DateFilter icon={iconMapping.DateRan}
+    //       <div className="flex gap-28 items-center ">
+    //         <div className=" flex gap-2 items-center">
+    //           <div className="flex gap-1 items-center">
+    //             <DateFilter icon={iconMapping.DateRan}
                 
-                startDate={startDate} setStartDate={setStartDate}  endDate={endDate} setEndDate={setEndDate}
-                 />
-              </div>
+    //             startDate={startDate} setStartDate={setStartDate}  endDate={endDate} setEndDate={setEndDate}
+    //              />
+    //           </div>
 
               
-            </div>
+    //         </div>
            
             
-          </div>
+    //       </div>
         
 
 
-        </div>
+    //     </div>
 
 
 
-        <>
-            <div className="flex items-center border-1 rounded-lg bg-white justify-center ">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Type</th>
-                  </tr>
-                </thead>
+    //     <>
+    //         <div className="flex items-center border-1 rounded-lg bg-white justify-center ">
+    //           <table>
+    //             <thead>
+    //               <tr>
+    //                 <th>Name</th>
+    //                 <th>Category</th>
+    //                 <th>Date</th>
+    //                 <th>Amount</th>
+    //                 <th>Type</th>
+    //               </tr>
+    //             </thead>
 
-                <tbody>
-                  {tableElement}
+    //             <tbody>
+    //               {tableElement}
                   
-                  </tbody>
-              </table>
-            </div>
+    //               </tbody>
+    //           </table>
+    //         </div>
 
 
-            <div className="flex gap-2 p-2 justify-center items-center">
+    //         <div className="flex gap-2 p-2 justify-center items-center">
 
-             {Pagenation}
+    //          {Pagenation}
 
-            </div>
-
-
-
-          </>
+    //         </div>
 
 
-    </div>
+
+    //       </>
+
+
+    // </div>
   )
 
 }

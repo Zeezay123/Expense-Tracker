@@ -1,3 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "@radix-ui/colors/black-alpha.css";
+
+.ProgressRoot {
+
+	/* Fix overflow clipping in Safari */
+	/* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
+	
+}
+
+.ProgressIndicator {
+
+}

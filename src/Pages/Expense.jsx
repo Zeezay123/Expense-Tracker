@@ -2,6 +2,7 @@ import React from 'react'
 import TransCard from '../Components/TransCard'
 import MultiBar from '../Components/MultBar'
 import ChartData from '../../ChartData'
+import OverviewCard from '../Components/OverviewCard'
 
 const Expense = () => {
   const lasosos = 'Expense'
@@ -10,10 +11,15 @@ const Expense = () => {
   const green = '#13C296'
   const yellow = '#FCD34D'
   return (
-    <div className='bg-slate-400 h-full p-10'>Expense
-      <TransCard title={lasosos} colr={red}/>
-      <MultiBar ChartData={ChartData} />
-    </div>
+    <></>
+    // <div className='flex flex-col bg-slate-400 h-full p-10'>Expense
+    //   <TransCard title={lasosos} colr={red}/>
+      
+    //  <div className= 'flex gap-6'> 
+    //   <MultiBar ChartData={ChartData} />
+    //   <OverviewCard/>
+    //   </div> 
+    // </div>
   )
 }
 

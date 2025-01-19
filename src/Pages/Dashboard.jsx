@@ -14,15 +14,12 @@ import { Chart } from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import LineChart from "../Components/LineChart";
 import TransCard from "../Components/TransCard";
-
-
+import ChartData from "../../ChartData";
+import OverviewCard from "../Components/OverviewCard";
+import MultiBar from "../Components/MultBar";
+import Header from "../Components/Header";
 
 Chart.register(CategoryScale);
-
-
-
-
-
 
 const Dashboard = () => {
   const [pageNum, setPageNum] = useState([]);
@@ -30,143 +27,125 @@ const Dashboard = () => {
   const [dataTab, setDataTab] = useState([]);
   const [control, setControl] = useState(0);
   const [query, setQuery] = useState("");
-  const [debouncedQuery, setDeBouncedQuery] = useState("");/* for delay */
+  const [debouncedQuery, setDeBouncedQuery] = useState(""); /* for delay */
   const [filPageNum, setFilPageNum] = useState([]);
   const [filterd, setFiltered] = useState([]);
-  const [FilPage, setFilPage]= useState([]) 
-  const [startDate, setStartDate]= useState('')
-  const [endDate, setEndDate]= useState('')
-  const [filteredByDate, setFilteredByDate]= useState([]);
-  const [currFilteredByDate, setCurrFilteredByDate]= useState([]);
+  const [FilPage, setFilPage] = useState([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [filteredByDate, setFilteredByDate] = useState([]);
+  const [currFilteredByDate, setCurrFilteredByDate] = useState([]);
   const [dateFilterPage, setDateFilterPage] = useState([]);
-  const[isshowPopFilter, setIsShowPopFilter] = useState(false)
+  const [isshowPopFilter, setIsShowPopFilter] = useState(false);
 
-  const [selectedType, setSelectedType] = useState(''); 
-  const [filteredByType, setFilteredByType] = useState([])
-  const [currFilteredByType, setCurrFilteredByType] = useState([])
-  const [typeFilteredPage, setTypeFilteredPage] = useState([])
+  const [selectedType, setSelectedType] = useState("");
+  const [filteredByType, setFilteredByType] = useState([]);
+  const [currFilteredByType, setCurrFilteredByType] = useState([]);
+  const [typeFilteredPage, setTypeFilteredPage] = useState([]);
 
-  const [selectedCategory, setSelectedCategory] = useState('');  
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [filteredByCategory, setFilteredByCategory] = useState([]);
-  const [currFilteredByCategory, setCurrFilteredByCategory]=useState([]);
+  const [currFilteredByCategory, setCurrFilteredByCategory] = useState([]);
   const [categoryFilteredPage, setCategoryFilteredPage] = useState([]);
 
-  const [transactions, setTransaction] = useState(Tabledata)
-  const [isShowAddTrans, setIsShowAddTrans] = useState(false)
+  const [transactions, setTransaction] = useState(Tabledata);
+  const [isShowAddTrans, setIsShowAddTrans] = useState(false);
 
-  const [incomeGraphData, setIncomeGraphData] = useState([100,200,300])
-  const [expenseGraphData, setExpenseGraphData] = useState([200,400,400,700]) 
-  const [savingsGraphData, setSavingsGraphData] = useState([300,500,600,800,900]) 
+  const [incomeGraphData, setIncomeGraphData] = useState([100, 200, 300]);
+  const [expenseGraphData, setExpenseGraphData] = useState([
+    200, 400, 400, 700,
+  ]);
+  const [savingsGraphData, setSavingsGraphData] = useState([
+    300, 500, 600, 800, 900,
+  ]);
 
-  const [chartsData, setChartData] = useState({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-      datasets:[
-        {
-          label: 'Income Spendings',
-          data:incomeGraphData, 
-          backgroundColor: 'yellow',
-          borderColor:'yellow',
-          tension:0.5
-        },
-  
-        {
-          label: 'Expense Spendings',
-          data:expenseGraphData, 
-          backgroundColor: 'red',
-          borderColor:'red',
-          tension:0.5
-        },
-  
-        {
-          label: 'Saving Spendings',
-          data:savingsGraphData, 
-          backgroundColor: 'green',
-          borderColor:'green',
-          tension:0.5
+  // const [chartsData, setChartData] = useState({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
+  //     datasets:[
+  //       {
+  //         label: 'Income Spendings',
+  //         data:incomeGraphData,
+  //         backgroundColor: 'yellow',
+  //         borderColor:'yellow',
+  //         tension:0.5
+  //       },
 
-         
-        }
-      ]
-    })
+  //       {
+  //         label: 'Expense Spendings',
+  //         data:expenseGraphData,
+  //         backgroundColor: 'red',
+  //         borderColor:'red',
+  //         tension:0.5
+  //       },
 
-useEffect(() => {
-  
-setChartData({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-  datasets:[
-    {
-      label: 'Income',
-      data:incomeGraphData.flat(), 
-      backgroundColor: 'yellow',
-      borderColor:'yellow',
-      tension:0.5
-    },
+  //       {
+  //         label: 'Saving Spendings',
+  //         data:savingsGraphData,
+  //         backgroundColor: 'green',
+  //         borderColor:'green',
+  //         tension:0.5
 
-    {
-      label: 'Expense',
-      data:expenseGraphData.flat(), 
-      backgroundColor: 'red',
-          borderColor:'red',
-          tension:0.5
-    
-    },
+  //       }
+  //     ]
+  //   })
 
-    {
-      label: 'Saving',
-      data:savingsGraphData.flat(), 
-      backgroundColor: 'green',
-      borderColor:'green',
-      tension:0.5 
-     
-    }
-  ]
-})
-  
-}, [chartsData,incomeGraphData,expenseGraphData,savingsGraphData])
+  // useEffect(() => {
 
+  // setChartData({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
+  //   datasets:[
+  //     {
+  //       label: 'Income',
+  //       data:incomeGraphData.flat(),
+  //       backgroundColor: 'yellow',
+  //       borderColor:'yellow',
+  //       tension:0.5
+  //     },
 
+  //     {
+  //       label: 'Expense',
+  //       data:expenseGraphData.flat(),
+  //       backgroundColor: 'red',
+  //           borderColor:'red',
+  //           tension:0.5
 
+  //     },
 
+  //     {
+  //       label: 'Saving',
+  //       data:savingsGraphData.flat(),
+  //       backgroundColor: 'green',
+  //       borderColor:'green',
+  //       tension:0.5
+
+  //     }
+  //   ]
+  // })
+
+  // }, [])
 
   const togglePopOver = () => {
     setIsShowPopFilter((prev) => !prev);
   };
-  
-  const toggleAddTrans = ()=>{
-    setIsShowAddTrans((prev)=>!prev); 
 
-  }
+  const toggleAddTrans = () => {
+    setIsShowAddTrans((prev) => !prev);
+  };
 
-const addTransaction = (newtransaction)=>{
-   
+  const addTransaction = (newtransaction) => {
     Tabledata.push(newtransaction);
-    setTransaction((prev) => [...prev, newtransaction])
+    setTransaction((prev) => [...prev, newtransaction]);
     toggleAddTrans();
-  
-}
-
+  };
 
   const text = "add transaction";
-  // mapping icon for dynamic use   exIcon: '#E10E0E',
-  // balIcon: '#1C3FB7',
-  // inIcon: '#13C296',
-  // eIcon: '#D97706'
-  // const iconMapping = {
-  //   expenseIcon: <FaMoneyBillTransfer color="#E10E0E" size={18} />,
-  //   incomeIcon: <FaMoneyBillTrendUp color="#13C296" size={18} />,
-  //   savingsIcon: <FaTableCellsRowLock color="#FCD34D" size={18} />,
-  //   balanceIcon: <AiFillDashboard color="#1C3FB7" size={18} />,
-  //   DateRan: <MdDateRange size={18} />,
-  //   filter: <AiFillFilter size={18} />,
-  //   addbutton: <IoIosAddCircleOutline size={20} />,
-  //   leftarr: <FaChevronLeft size={18} />,
-  //   rightarr: <FaChevronRight size={18} />,
-  // };
 
 
+  function firstLCap(word){
 
+    //   const firstletter = word.slice(0,1).toUpperCase()
+      return word.charAt(0).toUpperCase() + word.slice(1)
+}
 
-
-
-// original data display without search spliting of data into arrays of 10s
+  // original data display without search spliting of data into arrays of 10s
 
   useEffect(() => {
     const temp = [...transactions];
@@ -183,11 +162,7 @@ const addTransaction = (newtransaction)=>{
     setPageNum(Array.from({ length: num }, (_, index) => (index += 1)));
   }, [transactions]);
 
-
-
-
-
-/* useeffect to handle changes in query,
+  /* useeffect to handle changes in query,
  user chooses to search by name a settime out function is used to allow users to finish typing before request 
 */
   useEffect(() => {
@@ -200,22 +175,13 @@ const addTransaction = (newtransaction)=>{
     };
   }, [query]);
 
-
-
-// search by name filtered
+  // search by name filtered
   const filteredSearch = dataTab.flat().filter((items) => {
     return items.name.toLowerCase().includes(debouncedQuery.toLowerCase());
   });
 
-
-
-
-
-
-
-// filtered search result used to setup table split in 10s, runs when user query is changed
+  // filtered search result used to setup table split in 10s, runs when user query is changed
   useEffect(() => {
-    
     const filteredtemp = [...filteredSearch];
     const fillnum = Math.ceil(filteredtemp.length / 10);
     const fillArr = Array.from({ length: fillnum }, () => []);
@@ -224,260 +190,189 @@ const addTransaction = (newtransaction)=>{
         fillArr[i].push(filteredtemp.shift());
       }
     }
-   
-  
+
     // const [filPageNum,
-    // const [filterd, 
-    setFiltered(fillArr)
-    setFilPage(fillArr[0])
-    setFilPageNum(Array.from({length:fillnum}, (_,index) => (index += 1)))
-    
-  }, [debouncedQuery])
+    // const [filterd,
+    setFiltered(fillArr);
+    setFilPage(fillArr[0]);
+    setFilPageNum(Array.from({ length: fillnum }, (_, index) => (index += 1)));
+  }, [debouncedQuery]);
 
+  // page change function for next page.
 
-
-    
-
-
-
-
-
-  
-  
-  // page change function for next page. 
-  
   function pageFoward() {
-   
-   if(isCategorySelected){
+    if (isCategorySelected) {
       const newIndex = (control + 1) % categoryFilteredPage.length;
       setCurrFilteredByCategory(filteredByCategory[newIndex]);
       setControl(newIndex);
-    
-    }
-  else if(isTypeSelected){
-  const newIndex = (control + 1) % typeFilteredPage.length;
-  setCurrFilteredByType(filteredByType[newIndex]);
-  setControl(newIndex);
-
-}
-    else if (isDateFiltered) {
+    } else if (isTypeSelected) {
+      const newIndex = (control + 1) % typeFilteredPage.length;
+      setCurrFilteredByType(filteredByType[newIndex]);
+      setControl(newIndex);
+    } else if (isDateFiltered) {
       const newIndex = (control + 1) % dateFilterPage.length;
       setCurrFilteredByDate(filteredByDate[newIndex]);
       setControl(newIndex);
-    }
-
-    else if(debouncedQuery === ''){
+    } else if (debouncedQuery === "") {
       const newIndex = (control + 1) % pageNum.length;
       setCurrPage(dataTab[newIndex]);
       setControl(newIndex);
-    }
-    else {
+    } else {
       const newIndex = (control + 1) % filPageNum.length;
       setFilPage(filterd[newIndex]);
       setControl(newIndex);
     }
-    
   }
-  
-  
 
-  
-  // page change function for previous01 page. 
-  
+  // page change function for previous01 page.
+
   function pageBack() {
     if (isCategorySelected) {
-      const newIndex = (control - 1 + categoryFilteredPage.length) % categoryFilteredPage.length;
+      const newIndex =
+        (control - 1 + categoryFilteredPage.length) %
+        categoryFilteredPage.length;
       setCurrFilteredByCategory(filteredByCategory[newIndex]);
-       setControl(newIndex);
-    } 
-   
-   else if (isTypeSelected) {
-      const newIndex = (control - 1 + typeFilteredPage.length) % typeFilteredPage.length;
+      setControl(newIndex);
+    } else if (isTypeSelected) {
+      const newIndex =
+        (control - 1 + typeFilteredPage.length) % typeFilteredPage.length;
       setCurrFilteredByType(filteredByType[newIndex]);
-       setControl(newIndex);
-    } 
-    else if (isDateFiltered) {
-      const newIndex = (control - 1 + dateFilterPage.length) % dateFilterPage.length;
+      setControl(newIndex);
+    } else if (isDateFiltered) {
+      const newIndex =
+        (control - 1 + dateFilterPage.length) % dateFilterPage.length;
       setCurrFilteredByDate(filteredByDate[newIndex]);
       setControl(newIndex);
-    } 
-    else if(debouncedQuery === '') {
+    } else if (debouncedQuery === "") {
       const newIndex = (control - 1 + pageNum.length) % pageNum.length;
       setCurrPage(dataTab[newIndex]);
       setControl(newIndex);
-    }
-    else{
-      
+    } else {
       const newIndex = (control - 1 + filPageNum.length) % filPageNum.length;
       setFilPage(filterd[newIndex]);
       setControl(newIndex);
-      
-    } 
-    
+    }
   }
 
-  
+  const isFiltered = debouncedQuery !== "";
 
-
-
-
-
-
-
-  const isFiltered = debouncedQuery !== '';
- 
   const currentPageNum = isFiltered ? filPageNum : pageNum;
 
   const isDateFiltered = startDate && endDate;
-  const currdatepagenum = isDateFiltered ?  dateFilterPage : currentPageNum;
-  const isTypeSelected = selectedType !== '';
-  const isCategorySelected = selectedCategory !== '';
-   
-  const currentTypePage = isTypeSelected ? typeFilteredPage : currdatepagenum;  
-  const currentCatPage = isCategorySelected? categoryFilteredPage : currentTypePage
+  const currdatepagenum = isDateFiltered ? dateFilterPage : currentPageNum;
+  const isTypeSelected = selectedType !== "";
+  const isCategorySelected = selectedCategory !== "";
 
-
+  const currentTypePage = isTypeSelected ? typeFilteredPage : currdatepagenum;
+  const currentCatPage = isCategorySelected
+    ? categoryFilteredPage
+    : currentTypePage;
 
   let typeSearch = [];
 
-if (isTypeSelected) {
-  typeSearch = (isFiltered || isDateFiltered) ? filteredByDate : dataTab;
-}
+  if (isTypeSelected) {
+    typeSearch = isFiltered || isDateFiltered ? filteredByDate : dataTab;
+  }
 
-  const filteredType = typeSearch.flat().filter((data)=>{ 
-    return data.type.toLowerCase().includes(selectedType.toLowerCase())
-  })
+  const filteredType = typeSearch.flat().filter((data) => {
+    return data.type.toLowerCase().includes(selectedType.toLowerCase());
+  });
 
-let categorySearch = [];
+  let categorySearch = [];
 
-if(isCategorySelected)
-{
-   categorySearch = (isTypeSelected || isFiltered || isDateFiltered) ? filteredType : dataTab;
-}
+  if (isCategorySelected) {
+    categorySearch =
+      isTypeSelected || isFiltered || isDateFiltered ? filteredType : dataTab;
+  }
 
+  //Aternative
+  // if (isTypeSelected) {
+  //   if (isFiltered) {
+  //     if (isDateFiltered) {
+  //       typeSearch = filteredByDate;
+  //     } else {
+  //       typeSearch = filteredSearch;
+  //     }
+  //   } else {
+  //     if (isDateFiltered) {
+  //       typeSearch = filteredByDate;
+  //     } else {
+  //       typeSearch = dataTab;
+  //     }
+  //   }
+  // }
 
+  const dateSearch = isFiltered ? filteredSearch : dataTab;
 
+  const filteredDate = dateSearch.flat().filter((dates) => {
+    const checkDate = Date.parse(dates.date);
+    const tempStartDate = Date.parse(startDate);
+    const tempEndDate = Date.parse(endDate);
+    if (!startDate || !endDate) return true;
+    return checkDate >= tempStartDate && checkDate <= tempEndDate;
+  });
 
+  useEffect(() => {
+    const tempDate = [...filteredDate];
+    const num = Math.ceil(tempDate.length / 10);
+    const newArry = Array.from({ length: num }, () => []);
 
-//Aternative
-// if (isTypeSelected) {
-//   if (isFiltered) {
-//     if (isDateFiltered) {
-//       typeSearch = filteredByDate;
-//     } else {
-//       typeSearch = filteredSearch;
-//     }
-//   } else {
-//     if (isDateFiltered) {
-//       typeSearch = filteredByDate;
-//     } else {
-//       typeSearch = dataTab;
-//     }
-//   }
-// }
+    for (let i = 0; i < num; i++) {
+      for (let j = 0; j < 10 && tempDate.length; j++) {
+        newArry[i].push(tempDate.shift());
+      }
+    }
 
+    setFilteredByDate(newArry);
+    setCurrFilteredByDate(newArry[0]);
+    setDateFilterPage(Array.from({ length: num }, (_, index) => (index += 1)));
+  }, [startDate, endDate, isFiltered, debouncedQuery]);
 
+  useEffect(() => {
+    const tempDate = [...filteredType];
+    const num = Math.ceil(tempDate.length / 10);
+    const newArry = Array.from({ length: num }, () => []);
 
- const dateSearch = isFiltered ? filteredSearch : dataTab;
+    for (let i = 0; i < num; i++) {
+      for (let j = 0; j < 10 && tempDate.length; j++) {
+        newArry[i].push(tempDate.shift());
+      }
+    }
 
-  const filteredDate = dateSearch.flat().filter((dates) =>{
+    setFilteredByType(newArry);
+    setCurrFilteredByType(newArry[0]);
+    setTypeFilteredPage(
+      Array.from({ length: num }, (_, index) => (index += 1))
+    );
+  }, [selectedType]);
 
-  const checkDate = Date.parse(dates.date)
-  const tempStartDate = Date.parse(startDate)
-  const tempEndDate = Date.parse(endDate)
-  if (!startDate || !endDate) return true;
-  return checkDate >= tempStartDate  && checkDate <= tempEndDate
- 
-})
+  const filteredCategory = categorySearch.flat().filter((data) => {
+    return data.category.toLowerCase().includes(selectedCategory.toLowerCase());
+  });
 
+  useEffect(() => {
+    const tempDate = [...filteredCategory];
+    const num = Math.ceil(tempDate.length / 10);
+    const newArry = Array.from({ length: num }, () => []);
 
-useEffect(() => {
+    for (let i = 0; i < num; i++) {
+      for (let j = 0; j < 10 && tempDate.length; j++) {
+        newArry[i].push(tempDate.shift());
+      }
+    }
 
-const tempDate = [...filteredDate];
-const num = Math.ceil(tempDate.length/10);
-const newArry = Array.from({length:num},()=>[]);
-
- for(let i=0; i<num; i++){
-   for(let j=0; j< 10 && tempDate.length; j++){
-    newArry[i].push(tempDate.shift())
-   }
- }
-
-setFilteredByDate(newArry)
-setCurrFilteredByDate(newArry[0])
-setDateFilterPage(Array.from({length:num},(_,index)=>( index += 1)))
-
-
-}, [startDate,endDate,isFiltered,debouncedQuery])
-
-
-  
-
-
-
-
-useEffect(() => {
- 
-  const tempDate = [...filteredType];
-  const num = Math.ceil(tempDate.length/10);
-  const newArry = Array.from({length:num},()=>[]);
-  
-   for(let i=0; i<num; i++){
-     for(let j=0; j< 10 && tempDate.length; j++){
-      newArry[i].push(tempDate.shift())
-     }
-   }
-
- setFilteredByType(newArry) 
- setCurrFilteredByType(newArry[0])
- setTypeFilteredPage(Array.from({length:num},(_,index)=>( index += 1)))
-
-}, [selectedType])
-
-
-
-const filteredCategory = categorySearch.flat().filter((data)=>{
-  return data.category.toLowerCase().includes(selectedCategory.toLowerCase())
-})
-
-
-
-useEffect (()=>{
-  const tempDate = [...filteredCategory];
-  const num = Math.ceil(tempDate.length/10);
-  const newArry = Array.from({length:num},()=>[]);
-  
-   for(let i=0; i<num; i++){
-     for(let j=0; j< 10 && tempDate.length; j++){
-      newArry[i].push(tempDate.shift())
-     }
-   }
-
-   setFilteredByCategory(newArry)
-   setCurrFilteredByCategory(newArry[0])
-   setCategoryFilteredPage(Array.from({length:num},(_,index)=>( index += 1)))
-   
-
-
-},[selectedCategory])
-
-
-
-
-
- 
-
-
-
-
-
-
+    setFilteredByCategory(newArry);
+    setCurrFilteredByCategory(newArry[0]);
+    setCategoryFilteredPage(
+      Array.from({ length: num }, (_, index) => (index += 1))
+    );
+  }, [selectedCategory]);
 
   // const dashboardelement = Dataone.map((data, index) => {
   //   return (
   //     <div
   //       key={index}
-  //       className={`flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4 
+  //       className={`flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4
   //         ${
   //           data.title === "Income"
   //             ? "border-green-400"
@@ -510,7 +405,7 @@ useEffect (()=>{
   //           <span className=" font-sans font-black text-lg">{data.amount}</span>
   //         </div>
   //         <div
-  //           className={`flex justify-center text-lg  items-center border rounded-full w-20 h-8 
+  //           className={`flex justify-center text-lg  items-center border rounded-full w-20 h-8
   //         ${
   //           data.title === "Income"
   //             ? "text-green-500 bg-green-100"
@@ -529,141 +424,138 @@ useEffect (()=>{
   //   );
   // });
 
-const dashboardelement = Dataone.map((data, index) => {
-  return (
-    <TransCard
-      key={index}
-      title={data.title}
-      amount={data.amount}
-      percent={data.percentage}
-      icon={data.icon}
-      gain={data.gains}
-      colr={data.title === 'Balance' ? 'blue' : data.title === 'Income' ? 'green' : data.title === 'Expenses' ? 'red' : 'yellow'}
-    />
-  );
-});
-
-
-
-
- 
-
-
- 
-
+  const dashboardelement = Dataone.map((data, index) => {
+    return (
+      <TransCard
+        key={index}
+        title={data.title}
+        amount={data.amount}
+        percent={data.percentage}
+        icon={data.icon}
+        gain={data.gains}
+        colr={
+          data.title === "Balance"
+            ? "blue"
+            : data.title === "Income"
+            ? "green"
+            : data.title === "Expenses"
+            ? "red"
+            : "yellow"
+        }
+      />
+    );
+  });
 
   const onlySearchQuery = debouncedQuery === "" ? currPage : FilPage;
-  const searchQueryAndDate = isDateFiltered ? currFilteredByDate: onlySearchQuery || []; 
-  const searchQueryDateandType = isTypeSelected ? currFilteredByType: searchQueryAndDate;
+  const searchQueryAndDate = isDateFiltered
+    ? currFilteredByDate
+    : onlySearchQuery || [];
+  const searchQueryDateandType = isTypeSelected
+    ? currFilteredByType
+    : searchQueryAndDate;
 
- const queryNoQuery = isCategorySelected ? currFilteredByCategory: searchQueryDateandType;
+  const queryNoQuery = isCategorySelected
+    ? currFilteredByCategory
+    : searchQueryDateandType;
 
-  const tableElement = Array.isArray(queryNoQuery) && queryNoQuery.length > 0 ? queryNoQuery.map((data, index) => {
-    return (
-      <tr key={index}>
-        <td> {data.name} </td>
-        <td> {data.category}</td>
-        <td> {data.date}</td>
-        <td> {`$${data.amount}`}</td>
-        <td
-          className={` w-20 h-7 flex justify-center font-sans  items-center border rounded-full ${
-            data.type === "income"
-              ? "bg-green-100 text-green-500 font-normal"
-              : data.type === "expense"
-              ? "bg-red-100 text-red-500 font-normal"
-              : data.type === "savings"
-              ? "bg-yellow-100 text-yellow-500 font-normal"
-              : "bg-blue-100 text-blue-500 font-normal"
-          }`}
-        >
-         
-          {data.type}
+  const tableElement =
+    Array.isArray(queryNoQuery) && queryNoQuery.length > 0 ? (
+      queryNoQuery.map((data, index) => {
+        return (
+          <tr key={index}>
+            <td> {firstLCap(data.name)} </td>
+            <td> {firstLCap(data.category)}</td>
+            <td> {firstLCap(data.date)}</td>
+            <td> {`$${data.amount}`}</td>
+           <div className="w-[10.5rem] "> <td
+              className={` w-16 h-5 flex justify-center font-body text-[10px] font-semibold  items-center  rounded-[4px] ${
+                data.type === "income"
+                  ? "bg-incomelight text-incomebar"
+                  : data.type === "expense"
+                  ? "bg-expenselight text-expensebar font-normal"
+                  : data.type === "savings"
+                  ? "bg-savingslight text-savingsbar font-normal"
+                  : "bg-buttonlight text-buttoncolor font-normal"
+              }`} 
+            >
+              {firstLCap(data.type)}
+            </td></div>
+          </tr>
+        );
+      })
+    ) : (
+      <tr>
+        <td colSpan="5" className="text-center text-gray-500">
+          No Transactions Available
         </td>
       </tr>
     );
-  }) : (
-    <tr>
-      <td colSpan="5" className="text-center text-gray-500">
-        No transactions available
-      </td>
-    </tr>
+
+  const Pagenation = (
+    <>
+      <div onClick={pageBack}> {iconMapping.leftarr}</div>
+
+      <div className="flex gap-4">
+        {currentCatPage.map((num, index) => (
+          <div
+            onClick={() => {
+              if (isCategorySelected) {
+                setCurrFilteredByCategory(filteredByCategory[index]);
+                setControl(index);
+              } else if (isTypeSelected) {
+                setCurrFilteredByType(filteredByType[index]);
+                setControl(index);
+              } else if (isDateFiltered) {
+                setCurrFilteredByDate(filteredByDate[index]);
+                setControl(index);
+              } else if (isFiltered) {
+                setFilPage(filterd[index]);
+                setControl(index);
+              } else {
+                setCurrPage(dataTab[index]);
+                setControl(index);
+              }
+            }}
+            className={
+              index == control
+                ? "flex justify-center items-center border-2 bg-blue-600 w-6 h-6 rounded-full cursor-pointer"
+                : "flex justify-center items-center border-2  w-6 h-6 rounded-full cursor-pointer"
+            }
+            key={index}
+          >
+            {num}
+          </div>
+        ))}
+      </div>
+
+      <div onClick={pageFoward}> {iconMapping.rightarr}</div>
+    </>
   );
 
-
- 
-
-
-  const Pagenation = ( <>
-   <div onClick={pageBack}> {iconMapping.leftarr}</div>
-
-
-<div className="flex gap-4">
-  {currentCatPage.map((num, index) => (
-    <div
-      onClick={() => {
-      
-        if(isCategorySelected){
-          setCurrFilteredByCategory(filteredByCategory[index])
-          setControl(index)
-        }
-
-      else if(isTypeSelected) {
-          setCurrFilteredByType(filteredByType[index]) 
-           setControl(index)}
-
-         else if(isDateFiltered){
-          setCurrFilteredByDate(filteredByDate[index])
-          setControl(index)
-        }
-
-       else if(isFiltered) {
-        setFilPage(filterd[index]) 
-         setControl(index)}
-        
-        
-
-       else{
-         setCurrPage(dataTab[index])
-         setControl(index)
-       }
-      }}
-      className={
-        index == control
-          ? "flex justify-center items-center border-2 bg-blue-600 w-6 h-6 rounded-full cursor-pointer"
-          : "flex justify-center items-center border-2  w-6 h-6 rounded-full cursor-pointer"
-      }
-      key={index}
-    >
-      {num}
-    </div>
-  ))}
-</div>
-
-<div onClick={pageFoward}> {iconMapping.rightarr}</div>
-  
-  </>);
-
-
-
-
-
-
-
-
-
-
   return (
-    <div className="relative">
-    {isShowAddTrans && (<div><AddTrans addTransaction={addTransaction} toggleAddTrans={toggleAddTrans}/></div>)}
-    <div className="flex  flex-col bg-gray-50 pt-12 h-auto">
-       
-      <div className=" flex items-center justify-center gap-10 pl-20 sm:flex-wrap">
-        {dashboardelement}
+    <div className="relative bg-back flex flex-col">
+      <Header query={query} setQuery={setQuery} />
 
-        
-        <div className="flex gap-0 border-2 bg-white p-2 rounded-lg shadow-md">
+      <div className="flex p-6 ">
+        <div className="flex flex-col gap-1 ">
+          <div className="font-body font-bold text-3xl text-textcol">
+            Dashboard
+          </div>
+          <div className="font-body text-xs">
+            An overview of the entire accounting System
+          </div>
+        </div>
+      </div>
 
-<div className="flex flex-col gap-0 w-[59rem] ">
+      {/* {isShowAddTrans && (<div><AddTrans addTransaction={addTransaction} toggleAddTrans={toggleAddTrans}/></div>)} */}
+
+
+
+
+      <div className=" flex  flex-col items-center justify-center border-4 bg-back gap-7 px-6 ">
+        <div className="flex w-full gap-8">{dashboardelement}</div>
+
+        {/* <div className="flex flex-col gap-0 w-[59rem] ">
          <div className="flex flex-col p-2">
           <div className='flex justify-between pr-10'><h3 className="text-xl font-bold">Statistics</h3> <div>Month</div></div> 
           
@@ -707,109 +599,72 @@ const dashboardelement = Dataone.map((data, index) => {
           setExpenseGraphData={setExpenseGraphData}
           setSavingsGraphData={setSavingsGraphData}/>
         </div>
- </div>
+ </div> */}
 
 
 
-       <div className="flex flex-col items-center justify-center gap-10 border-l-2 p-5">
-        <div className="flex flex-col ">
-          <span className="text-gray-500"> 
-            Average Income
-            </span>
-            <span className="text-3xl font-bold">$1000</span>
-          <span className="text-gray-400">average monthly Income</span>
-        </div>
-
-
-        <div className="flex flex-col">
-          <span className="text-gray-500"> 
-            Average Expense
-            </span>
-            <span className="text-3xl font-bold">$1000</span>
-          <span className="text-gray-400">average monthly  expenses</span>
-        </div>
-
-
-
-        <div className="flex flex-col">
-          <span className="text-gray-500"> 
-            Average Savings
-            </span>
-            <span className="text-3xl font-bold">$1000</span>
-          <span className="text-gray-400">average monthly Savings</span>
-        </div>
-       </div>
-         
-       </div> 
-
-
-
-
-
-
-        <div className="flex justify-between items-center min-w-[74rem]">
-          <div>
-            <h2 className="font-title text-2xl font-bold">
-              Recent Transactions{" "}
-            </h2>
-            <p className="text-gray-400">
-              Check all you recent transactional activities.
-            </p>
+        <div className="flex gap-7 w-full mb-7 ">
+          <div className="flex w-[70%] h-[480px]">
+            <MultiBar ChartData={ChartData} />
           </div>
 
-
-          <div onClick={toggleAddTrans}>
-             <Button bIcon={iconMapping.addbutton} btext={text} />
-            </div>
-         
-          
+          <div className="w-[30%]">
+            <OverviewCard />
+          </div>
         </div>
+<div className="bg-red-300 p-2 w-full">
 
-        <div className="flex items-center justify-between min-w-[74rem] px-5 py-3 bg-white rounded-md relative">
+        <div className="flex items-center justify-between w-full px-2 py-1 bg-white   relative">
           <form action="">
             <input
-              className="flex w-[18.5rem] border-gray-50 border-2  h-[2rem] p-5 rounded-md"
+              className="flex w-[13.5rem] border-gray-50 border-2  h-[1rem] p-5 rounded-md"
               type="search"
               placeholder="search here..."
               name="search"
               onChange={(e) => setQuery(e.target.value)}
               value={query}
-            />
+              />
           </form>
 
-          <div className="flex gap-28 items-center ">
-            <div className=" flex gap-2 items-center">
+          <div className="flex gap-2 items-center ">
+          
               <div className="flex gap-1 items-center">
-                <DateFilter icon={iconMapping.DateRan} startDate={startDate} setStartDate={setStartDate}  endDate={endDate} setEndDate={setEndDate} />
+                <DateFilter
+                  icon={iconMapping.DateRan}
+                  startDate={startDate}
+                  setStartDate={setStartDate}
+                  endDate={endDate}
+                  setEndDate={setEndDate}
+                  />
               </div>
 
-              {/* <div className="flex gap-1 items-center">
-                EndDate: <DateFilter icon={iconMapping.DateRan} endDate={endDate} setEndDate={setEndDate} />
-              </div> */}
+      
+      
+           
+            <div
+              onClick={togglePopOver}
+              className="flex font-body font-normal text-xs gap-1 items-center  border-[1px] border-back px-3 py-1 shadow-sm rounded-md"
+              >
+              {iconMapping.filter} Filter
             </div>
-            <div onClick={togglePopOver} className="flex gap-2 items-center border-gray-100 border-2 p-2 rounded-md">
-              {iconMapping.filter} Filter 
-            </div>
-            
           </div>
-          { isshowPopFilter &&
-          ( <div className='flex  mt-[18rem] ml-[56rem] absolute'>
-            <PopOver 
-            setIsShowPopFilter={setIsShowPopFilter}
-            isshowPopFilter={isshowPopFilter}  
-           setSelectedType={setSelectedType}
-          setSelectedCategory={setSelectedCategory}/>
-
-           </div> )}
-
-
+          {isshowPopFilter && (
+            <div className="flex  mt-[18rem] ml-[56rem] absolute">
+              <PopOver
+                setIsShowPopFilter={setIsShowPopFilter}
+                isshowPopFilter={isshowPopFilter}
+                setSelectedType={setSelectedType}
+                setSelectedCategory={setSelectedCategory}
+                />
+            </div>
+          )}
         </div>
-       
+
         {queryNoQuery ? (
           <>
-            <div className="flex items-center border-1 rounded-lg bg-white justify-center ">
+            <div className="flex items-center font-body text-sm  bg-white justify-center p-1 ">
               <table>
-                <thead>
+                <thead className="bg-back">
                   <tr>
                     <th>Name</th>
                     <th>Category</th>
@@ -823,33 +678,19 @@ const dashboardelement = Dataone.map((data, index) => {
               </table>
             </div>
 
-
-            <div className="flex gap-2 p-2 justify-center items-center">
-
-             {Pagenation}
-
+            <div className="flex gap-2 p-1 justify-center items-center">
+              {Pagenation}
             </div>
-
-
-
           </>
-
-        ) 
-
-        :
-      
-        (
+        ) : (
           <div className="flex justify-center items-center w-full py-10">
-            <p className="text-gray-500 font-semibold text-lg">
+            <p className="text-gray-500 font-body font-semibold text-lg">
               No results found
             </p>
           </div>
         )}
-
-
-
+        </div>
       </div>
-    </div>
     </div>
   );
 };

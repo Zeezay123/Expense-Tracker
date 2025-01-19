@@ -1,7 +1,7 @@
 const Tabledata = [
     {
       name: "Entertainment",
-      category: "Entertainment",
+      category: "entertainment",
       date: "2024-02-18",
       amount: 1756.64,
       type: "expense"

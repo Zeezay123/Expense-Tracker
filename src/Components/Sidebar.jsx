@@ -8,20 +8,29 @@ import { FaTableCellsRowLock } from "react-icons/fa6";
 import { AiFillSetting } from "react-icons/ai";
 import { CiLogin } from "react-icons/ci";
 import logo from '../assets/logo.png'
+import { useState, useEffect } from 'react';
+
+
 
 const Sidebar = () => {
 
+  
+
 const activeStyles = {
-  background: "#FCF1FE",
+  background: "#487FFF",
   height: "3rem",
-  width: "100%",
+  width: "90%",
   display: "flex",
   gap: "0.5rem",
   alignItems: "center",
-  paddingLeft: "1rem",
-  borderRight: "0.25rem solid #db81eb"
+  borderRadius: "0.5rem",
+  color: "white",
+  textDecoration: "none",
+  
   
 };
+
+
 
 
 
@@ -35,24 +44,25 @@ const iconMapping = {
 }
 
   return (
-    <div className='flex w-[200px] h-screen flex-col justify-between fixed bg-white' >
-      <div className='flex flex-col '> 
-      <div className='flex items-center mb-5 p-5'> <img src={logo} width={100} height={50} alt="" /></div>
+  <div className='flex   h-screen flex-col justify-between w-[18%] 
+   bg-white border-r-[0.0625rem] border-iconback fixed overflow-hidden' >
+      <div className='flex flex-col font-sans font-semibold text-sm '> 
+      <div className='flex items-center mb-5 p-4  h-20 '> <img src={logo} width={100} height={48} alt="" /></div>
 
 
-      <NavLink  style={({isActive}) => isActive ? activeStyles : {}} className='dash-item' end  to='.'> <div className='dash-icon'>{iconMapping.dash}</div>  Dashboard </NavLink>
+      <NavLink  style={({isActive}) => isActive ? activeStyles : {}} className='dash-item ml-3 ' end  to='.'> <div className='dash-icon'>{iconMapping.dash}</div>  Dashboard </NavLink>
       
       
-       <NavLink style={({isActive}) => isActive ? activeStyles : {}} className='dash-item' end to='pages/income'> <div className='dash-icon'>{iconMapping.inc} </div>  Income </NavLink>
+       <NavLink style={({isActive}) => isActive ? activeStyles : {}} className='dash-item ml-3 ' end to='pages/income'> <div className='dash-icon'>{iconMapping.inc} </div>  Income </NavLink>
        
 
-       <NavLink style={({isActive}) => isActive ? activeStyles : {}}  className='dash-item' to='pages/Expense'> <div className='dash-icon'>{iconMapping.exp} </div> Expense </NavLink>
+       <NavLink style={({isActive}) => isActive ? activeStyles : {}}  className='dash-item ml-3 ' to='pages/Expense'> <div className='dash-icon'>{iconMapping.exp} </div> Expense </NavLink>
 
 
-       <NavLink style={({isActive}) => isActive ? activeStyles : {}}  className='dash-item' to='pages/savings'> <div className='dash-icon'>{iconMapping.sav} </div>  Savings </NavLink>
+       <NavLink style={({isActive}) => isActive ? activeStyles : {}}  className='dash-item ml-3 ' to='pages/savings'> <div className='dash-icon'>{iconMapping.sav} </div>  Savings </NavLink>
 
 
-       <NavLink style={({isActive}) => isActive ? activeStyles : {}}  className='dash-item' to='pages/settings'> <div className='dash-icon'>{iconMapping.sett} </div>  Setings </NavLink>
+       <NavLink style={({isActive}) => isActive ? activeStyles : {}}  className='dash-item ml-3 ' to='pages/settings'> <div className='dash-icon'>{iconMapping.sett} </div>  Setings </NavLink>
       </div>
      
 
