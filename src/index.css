@@ -22,6 +22,7 @@
 }
  
 
+
 .incomebg{
   background-color: var(--income-light);
 }
@@ -50,7 +51,7 @@ body{
 .dash-item {
   background:white;
   height: 3rem;
-  width: 100%;
+  width: 90%;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -142,17 +143,17 @@ a:hover {
 }
 
 .react-datepicker__day--selected {
-  background-color: #13c296; /* Change selected day background */
+  background-color: var(--text-col-two); /* Change selected day background */
   color: #fff; /* Change selected day text color */
 }
 
 .react-datepicker__day--today {
   font-weight: bold;
-  color: #e10e0e; /* Highlight today's date */
+  color: var(--button-color); /* Highlight today's date */
 }
 
 .react-datepicker__day--keyboard-selected {
-  background-color: #d97706; /* Change keyboard-selected background */
+  background-color: var(--button-color); /* Change keyboard-selected background */
   color: #fff;
 }
 .react-datepicker__navigation{
@@ -175,9 +176,11 @@ a:hover {
   } */
  
   .react-datepicker__input-container input{
-    border: 0.5px solid rgba(128, 128, 128, 0.37);
+    border: 0.5px solid var(--back);
     padding-left: 1.5rem;
-    border-radius: .1875rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.38rem;
  
   }
   .react-datepicker__input-container {
@@ -185,7 +188,8 @@ a:hover {
     display: flex;
     width: 100%;
     align-items: center;
-    font-size: 11px;
+    font-size: 12px;
+    /* box-shadow: 0 0.5px 1px 1px var(--back); */
     
 }
 

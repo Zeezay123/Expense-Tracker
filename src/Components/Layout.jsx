@@ -58,12 +58,12 @@ const arrowRotate =()=>{
       { onTempMenu ? <div className='z-[99] h-full w-full absolute'> <TempSiderBar onTempMenu={onTempMenu} setOnTempMenu={setOnTempMenu}/> </div> : null}
 
 
-       { offSideMenu ? null : !smallMenu ? <div className='flex w-[21%] mr-0'><Sidebar/></div> : <div className='flex w-[9%] mr-0'> <SidebarTwo/> </div>}
+       { offSideMenu ? null : !smallMenu ? <div className='hidden lg:flex w-[21%] mr-0'><Sidebar/></div> : <div className=' hidden lg:flex w-[9%] mr-0'> <SidebarTwo/> </div>}
  
        
 
 
- {offSideMenu ? null : <div className= {`flex items-center w-5 h-5 border-2 rounded-full bg-white z-20 mt-7 cursor-pointer transition-transform duration-300 
+ {offSideMenu ? null : <div className= {`hidden lg:flex items-center w-5 h-5 border-2 rounded-full bg-white z-20 mt-7 cursor-pointer transition-transform duration-300 
    ${isRotated ? 'rotateIcon' : '' } 
    ${ isanimated ? 'dot': ''}`} onClick={arrowRotate}>{iconMapping.arrowRight}</div> }
 

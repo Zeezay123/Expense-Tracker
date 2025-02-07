@@ -15,6 +15,11 @@ import { CiSettings } from "react-icons/ci";
 import { FaRegBell } from "react-icons/fa6";
 import { LuSettings } from "react-icons/lu";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { CiSearch } from "react-icons/ci";
+import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
+import { FaFileCsv } from "react-icons/fa";
+import { BsFileEarmarkMedical } from "react-icons/bs";
+import { BsFiletypePdf } from "react-icons/bs";
 
 
 
@@ -36,6 +41,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
         settingsIcn: <LuSettings size={16}/>,
         hamMenu: <GiHamburgerMenu size={20} color='#487FFF'/>,
         arrowRight: <MdOutlineChevronLeft size={20} />,
+        searchIcn: <CiSearch size={18} color=''/>,
+        pageLeft: <HiArrowNarrowLeft size={12}/>,
+        pageRight: <HiArrowNarrowRight size={12}/>,
+        csv: <BsFileEarmarkMedical size={15}/>,
+        pdf: <BsFiletypePdf size={14}/>
       };
     
 

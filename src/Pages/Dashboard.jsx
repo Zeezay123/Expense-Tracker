@@ -18,10 +18,13 @@ import ChartData from "../../ChartData";
 import OverviewCard from "../Components/OverviewCard";
 import MultiBar from "../Components/MultBar";
 import Header from "../Components/Header";
+import Excel from "../Components/Excel";
+import PdfDowload from "../Components/PdfDowload";
 
 Chart.register(CategoryScale);
 
 const Dashboard = () => {
+
   const [pageNum, setPageNum] = useState([]);
   const [currPage, setCurrPage] = useState([]);
   const [dataTab, setDataTab] = useState([]);
@@ -58,6 +61,16 @@ const Dashboard = () => {
   const [savingsGraphData, setSavingsGraphData] = useState([
     300, 500, 600, 800, 900,
   ]);
+
+
+
+
+  const userDetails = {
+    name: "John Doe",
+    accountNumber: "123456789",
+    statementPeriod: "01 Jan 2025 - 31 Jan 2025",
+  };
+
 
   // const [chartsData, setChartData] = useState({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
   //     datasets:[
@@ -493,9 +506,11 @@ const Dashboard = () => {
 
   const Pagenation = (
     <>
-      <div onClick={pageBack}> {iconMapping.leftarr}</div>
+      <div className=" flex items-center font-body font-semibold text-[10px] text-textcol h-6 px-2 rounded justify-center 
+       border-[1px] border-buttonlight gap-2 cursor-pointer" onClick={pageBack}>  {iconMapping.pageLeft} <span>
+       Previous  </span> </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         {currentCatPage.map((num, index) => (
           <div
             onClick={() => {
@@ -518,8 +533,8 @@ const Dashboard = () => {
             }}
             className={
               index == control
-                ? "flex justify-center items-center border-2 bg-blue-600 w-6 h-6 rounded-full cursor-pointer"
-                : "flex justify-center items-center border-2  w-6 h-6 rounded-full cursor-pointer"
+                ? "flex justify-center items-center font-body border-[1px] text-[10px] font-bold border-buttoncolor text-buttoncolor  w-5 h-5 rounded cursor-pointer"
+                : "flex justify-center items-center text-textcol text-[10px] font-body font-bold border-[1px] border-back  w-5 h-5 rounded cursor-pointer"
             }
             key={index}
           >
@@ -528,7 +543,8 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div onClick={pageFoward}> {iconMapping.rightarr}</div>
+      <div className=" flex items-center font-body font-semibold text-[10px] text-textcol h-6 px-2 rounded justify-center 
+       border-[1px] border-buttonlight gap-2 cursor-pointer"  onClick={pageFoward}> {iconMapping.pageRight} Next</div>
     </>
   );
 
@@ -552,8 +568,8 @@ const Dashboard = () => {
 
 
 
-      <div className=" flex  flex-col items-center justify-center border-4 bg-back gap-7 px-6 ">
-        <div className="flex w-full gap-8">{dashboardelement}</div>
+      <div className="flex  flex-col items-center justify-center  bg-back gap-7 px-6 ">
+        <div className="flex flex-col md:flex md:flex-row w-full gap-8">{dashboardelement}</div>
 
         {/* <div className="flex flex-col gap-0 w-[59rem] ">
          <div className="flex flex-col p-2">
@@ -612,18 +628,46 @@ const Dashboard = () => {
             <OverviewCard />
           </div>
         </div>
-<div className="bg-red-300 p-2 w-full">
 
-        <div className="flex items-center justify-between w-full px-2 py-1 bg-white   relative">
-          <form action="">
+
+
+<div className="flex justify-between items-center w-full">
+  <div className="font-bold font-body text-2xl">Transaction History</div>
+
+
+  <div className="flex gap-2 items-center">
+    
+
+    <div>
+      <PdfDowload transactions={Tabledata} Userdetails={userDetails}/>
+    </div>
+    
+    <div> 
+      <Excel data={Tabledata}/>
+       </div>
+    <div  className="flex font-body font-bold text-[10px]  bg-buttoncolor rounded shadow-sm px-3 py-2 items-center gap-1">Add Transaction</div>
+  </div>
+</div>
+
+
+
+<div className="bg-white px-2 py-4 w-full rounded-md mb-5 shadow-sm">
+
+        <div className="flex items-center justify-between w-full px-6 py-1 bg-white   relative">
+          <form  action="">
+            
+           <div  className="items-center flex justify-center gap-2 w-[13.5rem]
+            border-gray-50 border-2 font-body text-xs h-[2.3rem] p-2 rounded-md focus:outline-none focus:border-back"> 
             <input
-              className="flex w-[13.5rem] border-gray-50 border-2  h-[1rem] p-5 rounded-md"
+              className=" border-0 focus:outline-none"
               type="search"
-              placeholder="search here..."
+              placeholder='Search here...'
               name="search"
               onChange={(e) => setQuery(e.target.value)}
               value={query}
               />
+              <div>{iconMapping.searchIcn} </div>
+              </div>
           </form>
 
           <div className="flex gap-2 items-center ">
@@ -643,7 +687,7 @@ const Dashboard = () => {
            
             <div
               onClick={togglePopOver}
-              className="flex font-body font-normal text-xs gap-1 items-center  border-[1px] border-back px-3 py-1 shadow-sm rounded-md"
+              className="flex font-body font-normal text-xs gap-1 items-center  border-[1px] border-back px-3 py-2 shadow-sm rounded-md"
               >
               {iconMapping.filter} Filter
             </div>
@@ -672,14 +716,19 @@ const Dashboard = () => {
                     <th>Amount</th>
                     <th>Type</th>
                   </tr>
-                </thead>
+                </thead>  
 
                 <tbody>{tableElement}</tbody>
               </table>
             </div>
 
-            <div className="flex gap-2 p-1 justify-center items-center">
-              {Pagenation}
+            <div className="flex px-8 py-2 justify-between items-center">
+             <div className="flex border-[1px] px-2 py-1 rounded text-[10px] font-body font-semibold text-textcol shadow-sm">Page {control + 1} of { isCategorySelected ? filteredByCategory.length : isTypeSelected ? filteredByType.length :
+             isDateFiltered ? filteredByDate.length : isFiltered ? filterd.length : dataTab.length}
+
+
+
+           </div> <div className="flex items-center gap-2">{Pagenation}  </div ><div className="flex opacity-0">{"page"}</div>
             </div>
           </>
         ) : (

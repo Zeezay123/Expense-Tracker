@@ -10,22 +10,23 @@ const DateFilter = ({icon,setStartDate,startDate,endDate,setEndDate}) => {
     
     return (
 <>
-<span> StartDate:</span>
+
   <DatePicker 
+
   showIcon
   selected={startDate} 
   onChange={(date) => (setStartDate(date))}
   icon={icon}
-  placeholderText='Select Date'
+  placeholderText='Start Date'
    dateFormat="yyyy/MM/dd"
   />
-   <span>EndDate:</span>
+   <span>-</span>
      <DatePicker 
       showIcon
       selected={endDate} 
       onChange={(date) => setEndDate(date)}
       icon={icon}
-      placeholderText='Select Date'
+      placeholderText='End Date'
        dateFormat="yyyy/MM/dd"
      />
  </>
