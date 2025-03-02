@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  purge: [ './src/**/*.{js,jsx,ts,tsx}',  './Expense-Tracker/index.html',],
+  content: [ './src/**/*.{js,jsx,ts,tsx}',  './Expense-Tracker/index.html',],
   theme: {
     extend: {
       colors:{
