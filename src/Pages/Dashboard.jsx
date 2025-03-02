@@ -706,7 +706,7 @@ const Dashboard = () => {
 
         {queryNoQuery ? (
           <>
-            <div className="flex  md:items-center font-body text-sm  bg-white md:justify-center p-1 overflow-x-scroll ">
+            <div className="flex  md:items-center md:overflow-hidden font-body text-sm  bg-white md:justify-center p-1 overflow-x-scroll ">
               <table>
                 <thead className="bg-back">
                   <tr>
