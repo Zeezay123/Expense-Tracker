@@ -9,23 +9,45 @@ import { useOutletContext } from 'react-router-dom';
 
 const Header = ({query, setQuery}) => {
 
-const {onTempMenu, setOnTempMenu, offSideMenu} = useOutletContext();
+const {onTempMenu, setOnTempMenu, offSideMenu, smallMenu, setSmallMenu} = useOutletContext();
 const [showHamMenu, setSHowHamMenu] = useState(false)
+const [isRotated, setIsRotated] = useState(false)
+const [isanimated, setIsAnimated] =useState(false)
 
 
 const toggleHamMenu =()=> {
   setOnTempMenu(true)
 } 
 
+const arrowRotate =()=>{
+  setIsRotated(!isRotated)
+  setSmallMenu(!smallMenu)
+  setIsAnimated(!isanimated)
+
+  setTimeout(()=>{
+ setIsAnimated(false);
+  },700)
+}
+
+
   return (
     
     <div className='flex w-full p-5 items-center justify-between bg-white h-20 border-slate-50 border-b-[0.0625rem] ' > 
    
     
-    <div>
+    
+    <div> 
+
     {/* <h1 className='font-sans font-extrabold text-gray-900 text-2xl'> OVERVIEW</h1>  */}
 
-<div className='flex items-center gap-8'>
+<div className='flex items-center justify-center gap-8'>
+
+{offSideMenu ? null : <div className= {`hidden lg:flex items-center justify-center w-7 h-7  rounded-full ml-[-35px]
+  bg-blue-50 z-20  cursor-pointer transition-transform duration-300 
+   ${isRotated ? 'rotateIcon ml-[-30px]' : '' } 
+   ${ isanimated ? 'dot': ''}`} onClick={arrowRotate}>{iconMapping.arrowRight}</div> }
+    
+
 
    { offSideMenu ? <div className='flex items-center border-2 p-1 rounded-sm border-buttonlight' onClick={toggleHamMenu}> {iconMapping.hamMenu}</div> : null  }
 

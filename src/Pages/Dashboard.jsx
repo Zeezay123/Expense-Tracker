@@ -549,7 +549,7 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="relative bg-back flex flex-col">
+    <div className="relative w-full bg-back flex flex-col">
       <Header query={query} setQuery={setQuery} />
 
       <div className="flex p-6 ">
@@ -619,19 +619,19 @@ const Dashboard = () => {
 
 
 
-        <div className="flex gap-7 w-full mb-7 ">
-          <div className="flex w-[70%] h-[480px]">
+        <div className="flex flex-col lg:flex-row gap-7 w-full mb-7 ">
+          <div className="flex w-full h-auto  lg:w-[70%] lg:h-[480px]">
             <MultiBar ChartData={ChartData} />
           </div>
 
-          <div className="w-[30%]">
+          <div className="w-full  lg:w-[30%]">
             <OverviewCard />
           </div>
         </div>
 
 
 
-<div className="flex justify-between items-center w-full">
+<div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center justify-between w-full">
   <div className="font-bold font-body text-2xl">Transaction History</div>
 
 
@@ -651,9 +651,9 @@ const Dashboard = () => {
 
 
 
-<div className="bg-white px-2 py-4 w-full rounded-md mb-5 shadow-sm">
+<div className="bg-white px-2 py-4 w-full rounded-md mb-5 shadow-sm overflow-hidden">
 
-        <div className="flex items-center justify-between w-full px-6 py-1 bg-white   relative">
+        <div className="flex flex-col  md:flex-row items-start md:items-center gap-4 justify-between w-full md:px-6 md:py-4 bg-white   relative">
           <form  action="">
             
            <div  className="items-center flex justify-center gap-2 w-[13.5rem]
@@ -706,7 +706,7 @@ const Dashboard = () => {
 
         {queryNoQuery ? (
           <>
-            <div className="flex items-center font-body text-sm  bg-white justify-center p-1 ">
+            <div className="flex  md:items-center font-body text-sm  bg-white md:justify-center p-1 overflow-x-scroll ">
               <table>
                 <thead className="bg-back">
                   <tr>
@@ -722,8 +722,12 @@ const Dashboard = () => {
               </table>
             </div>
 
-            <div className="flex px-8 py-2 justify-between items-center">
-             <div className="flex border-[1px] px-2 py-1 rounded text-[10px] font-body font-semibold text-textcol shadow-sm">Page {control + 1} of { isCategorySelected ? filteredByCategory.length : isTypeSelected ? filteredByType.length :
+            <div className="flex flex-col-reverse gap-4 md:flex-row  px-8 py-2 justify-between items-center">
+             <div className="flex border-[1px] px-2 py-1 rounded text-[10px] 
+             font-body font-semibold text-textcol shadow-sm">
+              
+              Page {control + 1} of  {""}
+             { isCategorySelected ? filteredByCategory.length : isTypeSelected ? filteredByType.length :
              isDateFiltered ? filteredByDate.length : isFiltered ? filterd.length : dataTab.length}
 
 

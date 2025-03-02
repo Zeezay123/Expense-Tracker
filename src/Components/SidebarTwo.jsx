@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink,Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.svg'
 import Dashboard from '../Pages/Dashboard'
 import { AiFillDashboard } from "react-icons/ai";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
@@ -49,7 +49,7 @@ const iconMapping =(color) => ( {
     <div className='flex   h-screen flex-col justify-between w-[9%]
       bg-white border-r-[0.0625rem] border-iconback fixed overflow-hidden'>
     <div className='flex flex-col'>
-        <div className='flex items-center mb-5 p-4  h-20 '> <img src={logo} width={100} height={48} alt="logo" /></div>
+        <div className='flex items-center mb-5 p-4  h-20 '> <img src={logo} width={64} height={24} alt="logo" /></div>
        
        
        

@@ -12,7 +12,7 @@ const TransCard = ({title, amount, percent, icon, gain}) => {
 
   return (
 
-        <div className='flex flex-col gap-8 bg-[white] w-[23%]  p-3 rounded-md'>
+        <div className='flex flex-col gap-8 bg-[white] w-[100%]  p-3 rounded-md lg:w-[23%]'>
 
         <div className='flex gap-2 items-center'> <span className={ `flex items-center justify-center rounded-sm w-7 h-7 p-1
             ${ title.toLowerCase() =='income' ? 'bg-incomelight' 

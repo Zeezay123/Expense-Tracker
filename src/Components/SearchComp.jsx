@@ -8,7 +8,7 @@ const SearchComp = ({query, setQuery}) => {
 
 <form action="">
             <input
-              className="flex w-[20.5rem] border-gray-50 border-2  bg-iconback h-[2rem] p-5 rounded-md"
+              className="hidden  md:flex w-[20.5rem] border-gray-50 border-2  bg-iconback h-[2rem] p-5 rounded-md"
               type="search"
               placeholder="search here..."
               name="search"

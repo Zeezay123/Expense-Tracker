@@ -38,41 +38,26 @@ useEffect(()=>{
 
 
 
-const arrowRotate =()=>{
-   setIsRotated(!isRotated)
-   setSmallMenu(!smallMenu)
-   setIsAnimated(!isanimated)
-
-   setTimeout(()=>{
-  setIsAnimated(false);
-   },700)
-}
-
-
   return (
 
    
     
      <div className='flex  h-screen bg-back relative'>
       
-      { onTempMenu ? <div className='z-[99] h-full w-full absolute'> <TempSiderBar onTempMenu={onTempMenu} setOnTempMenu={setOnTempMenu}/> </div> : null}
+      { onTempMenu ? <div className='z-[99] h-full w-full absolute'> 
+         <TempSiderBar onTempMenu={onTempMenu} setOnTempMenu={setOnTempMenu}/> </div> : null}
 
 
-       { offSideMenu ? null : !smallMenu ? <div className='hidden lg:flex w-[21%] mr-0'><Sidebar/></div> : <div className=' hidden lg:flex w-[9%] mr-0'> <SidebarTwo/> </div>}
+       { offSideMenu ? null : !smallMenu ? <div className='hidden lg:flex w-[21%] mr-0'>
+         
+         <Sidebar/></div> : <div className=' hidden lg:flex w-[9%] mr-0'> <SidebarTwo/> </div>}
  
        
 
 
- {offSideMenu ? null : <div className= {`hidden lg:flex items-center w-5 h-5 border-2 rounded-full bg-white z-20 mt-7 cursor-pointer transition-transform duration-300 
-   ${isRotated ? 'rotateIcon' : '' } 
-   ${ isanimated ? 'dot': ''}`} onClick={arrowRotate}>{iconMapping.arrowRight}</div> }
-
-
-
-
     <div className='flex bg-back  w-full h-screen ml-[-8px] '>
 
-    <Outlet context={{onTempMenu, setOnTempMenu, offSideMenu}}/>
+    <Outlet context={{onTempMenu, setOnTempMenu, offSideMenu, smallMenu, setSmallMenu}}/>
  
     </div>   
 

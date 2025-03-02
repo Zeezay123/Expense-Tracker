@@ -7,7 +7,7 @@ import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { FaTableCellsRowLock } from "react-icons/fa6";
 import { AiFillSetting } from "react-icons/ai";
 import { CiLogin } from "react-icons/ci";
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.svg'
 import { useState, useEffect } from 'react';
 
 
