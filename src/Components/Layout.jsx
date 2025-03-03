@@ -17,10 +17,12 @@ const [isRotated, setIsRotated] = useState(false)
 const [smallMenu, setSmallMenu] = useState(false)
 const [isanimated, setIsAnimated] =useState(false)
 const [onTempMenu, setOnTempMenu] = useState(false)
+const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 useEffect(()=>{
  
    const handleScreenSize = () =>{ 
+      setScreenWidth(window.innerWidth);
       if(window.innerWidth > 1000) {
          setOffSideMenu(false)
       }
@@ -36,7 +38,10 @@ useEffect(()=>{
 
 },[]);
 
+const offTempMenu =()=> {
+   setOnTempMenu(false)
 
+}
 
   return (
 
@@ -55,12 +60,13 @@ useEffect(()=>{
        
 
 
-    <div className='flex bg-back  w-full h-screen ml-[-8px] '>
+  
 
-    <Outlet context={{onTempMenu, setOnTempMenu, offSideMenu, smallMenu, setSmallMenu}}/>
+   { onTempMenu ? <div className='flex relative overflow-hidden w-full'>   <div className='flex w-full ml-[60%] md:ml-[0] h-full bg-black opacity-50 absolute z-[99]'onClick={offTempMenu} > full</div> <Outlet key={screenWidth} context={{onTempMenu, setOnTempMenu, offSideMenu, smallMenu, setSmallMenu}}/> </div> 
+   :   <div className={`flex bg-back  h-screen ${!smallMenu ? 'w-full md:w-[82%]': 'w-full md:w-[91%]'  }`}><Outlet key={screenWidth} context={{onTempMenu, setOnTempMenu, offSideMenu, smallMenu, setSmallMenu}}/></div>  
+}
+    
  
-    </div>   
-
      </div>
    
 

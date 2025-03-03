@@ -51,10 +51,10 @@ const iconMapping = {
 
     
   return (
-    <div className='flex  w-full h-full  z-[99] absolute'>
+    <div className='flex  w-full h-full  z-[9] absolute'>
         
-    <div className='flex   h-screen flex-col justify-between w-[18%] 
-       bg-white border-r-[0.0625rem] border-iconback fixed overflow-hidden z-[99]' >
+    <div className='flex   h-screen flex-col justify-between w-[60%] md:w-[18%]
+       bg-white border-r-[0.0625rem] border-iconback fixed overflow-hidden z-[10]' >
           <div className='flex flex-col font-sans font-semibold text-sm '> 
           <div className='flex items-center mb-5 p-4  h-20 '> <img src={logo} width={100} height={48} alt="" /></div>
     
@@ -82,7 +82,7 @@ const iconMapping = {
     
         
         </div>
-        <div className='flex w-full h-full bg-black opacity-50 '> full</div>
+      
     
     
     
