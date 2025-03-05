@@ -35,7 +35,6 @@ const MultBar = ({ ChartData }) => {
     const fetchdata = async () => {
       try {
         const data = ChartData[0];
-        console.log(data);
         setBarData({
           labels: data.labels,
           datasets: data.datasets.map((dataset) => ({

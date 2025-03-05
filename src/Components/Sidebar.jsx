@@ -44,7 +44,7 @@ const iconMapping = {
 }
 
   return (
-  <div className='flex   h-screen flex-col justify-between w-[18%] 
+  <div className='flex   h-screen flex-col justify-between w-[18%] xl:
    bg-white border-r-[0.0625rem] border-iconback fixed overflow-hidden' >
       <div className='flex flex-col font-sans font-semibold text-sm '> 
       <div className='flex items-center mb-5 p-4  h-20 '> <img src={logo} width={100} height={48} alt="" /></div>

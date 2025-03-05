@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+import iconMapping from "./iconMapping";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,52 +24,43 @@ ChartJS.register(
 
 import { plugins } from "chart.js";
 
-const LineChart = ({ chartsData,dataTab, setIncomeGraphData, setExpenseGraphData, setSavingsGraphData}) => {
-    useEffect(() => {
-    const incomeArr = Array.from({length:12}, () =>[])  
-    const expenseArr = Array.from({length:12}, () =>[])  
-    const saveArr = Array.from({length:12}, () =>[])  
-    
-    
-    const sortByDate = dataTab.sort((a,b)=> {
-      const dateA = new Date(a.date)
-      const dateB = new Date(b.date)
-    
-      return dateA - dateB 
-    
-    })
-    
-    sortByDate.map((data) =>{
-      const dateObj = new Date(data.date)
-      const monthIndex = dateObj.getMonth();
-    
-    
-          if(data.type === 'income'){
-             incomeArr[monthIndex].push(data.amount)
-          }
-          if(data.type === 'expense' )
-          {
-            expenseArr[monthIndex].push(data.amount)
-          }
-          if(  data.type === 'savings'){
-          saveArr[monthIndex].push(data.amount)
-          }
-        
-    
-    })
-    
-    setIncomeGraphData(incomeArr.map(month => (month.reduce((acc, num) => acc + num, 0))))
-    setExpenseGraphData(expenseArr.map(month => (month.reduce((acc, num) => acc + num, 0))))
-    setSavingsGraphData(saveArr.map(month => (month.reduce((acc, num) => acc + num, 0))))
-    
-    
+const LineChart = ({ChartData}) => {
 
-     
-
-
-   }, [chartsData,dataTab, setIncomeGraphData, setExpenseGraphData, setSavingsGraphData])
    
+const [line, setLine] = useState({datasets:[] , labels:[]})
 
+
+
+useEffect ( ()=>{
+
+ const fetchdata = async ()=>{
+    try{
+      const data = ChartData[0].datasets.find(dataset => dataset.label.toLowerCase() === 'income')
+      console.log(data)
+      setLine({
+        labels: ChartData[0].labels,
+        datasets: [{
+          
+          label: data.label,
+           data: data.data,
+    
+           borderColor: data.borderColor,
+           tension: 0.3
+          }
+        ]
+      })
+
+      
+    } 
+    catch (error){
+      console.error("Error fetching data: ", error);
+    }
+ 
+  }
+  
+  fetchdata();
+
+},[ChartData])
 
 
 
@@ -81,9 +73,34 @@ const LineChart = ({ chartsData,dataTab, setIncomeGraphData, setExpenseGraphData
 
 
   return (
-<div style={{ width: '800px', height: '400px' }}>
+
+    <div  className="flex flex-col bg-white rounded-md w-full h-full border-2 p-4">
+      <div className="flex items-center justify-between p-2">
+        <h4 className="font-extrabold font-sans text-md">Statistics</h4>
+
+        <div className="flex items-center gap-5">
+          <div className="flex  item-center justify-center gap-[0.125rem]">
+            <span className="flex justify-center items-center text-green-400"> {iconMapping.circle}</span>
+             <span className="flex justify-center items-center text-gray-500 font-sans font-semibold text-xs">Income</span>
+          </div>
+
+
+          {/* <div className="flex  item-center justify-center gap-[0.125rem]">
+            <span className="flex justify-center items-center text-red-400"> {iconMapping.circle}</span> 
+            <span className="flex justify-center items-center text-gray-500 font-sans font-semibold text-xs">Expenses </span>
+          </div>
+
+
+          <div className="flex  item-center justify-center gap-[0.125rem]">
+            <span className="flex justify-center items-center text-yellow-300"> {iconMapping.circle}</span>
+             <span className="flex justify-center items-center text-gray-500 font-sans font-semibold text-xs">Savings</span>
+          </div> */}
+
+        </div>
+      </div>
+<div>
   <Line
-    data={chartsData}
+    data={line}
     options={{
       plugins: {
         title: {
@@ -110,6 +127,7 @@ const LineChart = ({ chartsData,dataTab, setIncomeGraphData, setExpenseGraphData
       }
     }}
   />
+</div>
 </div>
   );
 };
