@@ -8,7 +8,7 @@ const Tabledata = [
     },
     {
       name: "Added money to Savings",
-      category: "savings",
+      category: "personal",
       date: "2024-09-22",
       amount: 4695.71,
       type: "savings"
@@ -120,7 +120,7 @@ const Tabledata = [
     },
     {
       name: "Vacation savings",
-      category: "savings",
+      category: "Personal",
       date: "2024-05-22",
       amount: 800.00,
       type: "savings"
@@ -176,7 +176,7 @@ const Tabledata = [
     },
     {
       name: "Savings deposit",
-      category: "savings",
+      category: "income",
       date: "2024-06-14",
       amount: 1500.00,
       type: "savings"
@@ -232,7 +232,7 @@ const Tabledata = [
     },
     {
       name: "Emergency savings",
-      category: "savings",
+      category: "SOS",
       date: "2024-09-03",
       amount: 2500.00,
       type: "savings"
@@ -323,7 +323,7 @@ const Tabledata = [
     },
     {
       name: "Savings transfer",
-      category: "savings",
+      category: "Income",
       date: "2024-09-12",
       amount: 1000.00,
       type: "savings"

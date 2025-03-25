@@ -24,7 +24,7 @@ ChartJS.register(
 
 import { plugins } from "chart.js";
 
-const LineChart = ({ChartData}) => {
+const LineChart = ({ChartData,page}) => {
 
    
 const [line, setLine] = useState({datasets:[] , labels:[]})
@@ -35,8 +35,8 @@ useEffect ( ()=>{
 
  const fetchdata = async ()=>{
     try{
-      const data = ChartData[0].datasets.find(dataset => dataset.label.toLowerCase() === 'income')
-      console.log(data)
+      const data = ChartData[0].datasets.find(dataset => dataset.label.toLowerCase() === page)
+
       setLine({
         labels: ChartData[0].labels,
         datasets: [{
@@ -85,16 +85,6 @@ useEffect ( ()=>{
           </div>
 
 
-          {/* <div className="flex  item-center justify-center gap-[0.125rem]">
-            <span className="flex justify-center items-center text-red-400"> {iconMapping.circle}</span> 
-            <span className="flex justify-center items-center text-gray-500 font-sans font-semibold text-xs">Expenses </span>
-          </div>
-
-
-          <div className="flex  item-center justify-center gap-[0.125rem]">
-            <span className="flex justify-center items-center text-yellow-300"> {iconMapping.circle}</span>
-             <span className="flex justify-center items-center text-gray-500 font-sans font-semibold text-xs">Savings</span>
-          </div> */}
 
         </div>
       </div>

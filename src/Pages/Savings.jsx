@@ -20,10 +20,11 @@ import MultiBar from "../Components/MultBar";
 import Header from "../Components/Header";
 import Excel from "../Components/Excel";
 import PdfDowload from "../Components/PdfDowload";
+import MiniOverview from "../Components/MiniOverview"
 
 Chart.register(CategoryScale);
 
-const Savings = () => {
+const Savings= () => {
 
   const [pageNum, setPageNum] = useState([]);
   const [currPage, setCurrPage] = useState([]);
@@ -53,17 +54,10 @@ const Savings = () => {
 
   const [transactions, setTransaction] = useState(Tabledata);
   const [isShowAddTrans, setIsShowAddTrans] = useState(false);
-
-  const [incomeGraphData, setIncomeGraphData] = useState([100, 200, 300]);
-  const [expenseGraphData, setExpenseGraphData] = useState([
-    200, 400, 400, 700,
-  ]);
-  const [savingsGraphData, setSavingsGraphData] = useState([
-    300, 500, 600, 800, 900,
-  ]);
+  const [page, setPage] = useState('savings')
 
 
-
+const tranData = Tabledata.flat().filter((items)=> items.type.toLowerCase().includes(page))
 
   const userDetails = {
     name: "John Doe",
@@ -72,68 +66,7 @@ const Savings = () => {
   };
 
 
-  // const [chartsData, setChartData] = useState({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-  //     datasets:[
-  //       {
-  //         label: 'Income Spendings',
-  //         data:incomeGraphData,
-  //         backgroundColor: 'yellow',
-  //         borderColor:'yellow',
-  //         tension:0.5
-  //       },
-
-  //       {
-  //         label: 'Expense Spendings',
-  //         data:expenseGraphData,
-  //         backgroundColor: 'red',
-  //         borderColor:'red',
-  //         tension:0.5
-  //       },
-
-  //       {
-  //         label: 'Saving Spendings',
-  //         data:savingsGraphData,
-  //         backgroundColor: 'green',
-  //         borderColor:'green',
-  //         tension:0.5
-
-  //       }
-  //     ]
-  //   })
-
-  // useEffect(() => {
-
-  // setChartData({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-  //   datasets:[
-  //     {
-  //       label: 'Income',
-  //       data:incomeGraphData.flat(),
-  //       backgroundColor: 'yellow',
-  //       borderColor:'yellow',
-  //       tension:0.5
-  //     },
-
-  //     {
-  //       label: 'Expense',
-  //       data:expenseGraphData.flat(),
-  //       backgroundColor: 'red',
-  //           borderColor:'red',
-  //           tension:0.5
-
-  //     },
-
-  //     {
-  //       label: 'Saving',
-  //       data:savingsGraphData.flat(),
-  //       backgroundColor: 'green',
-  //       borderColor:'green',
-  //       tension:0.5
-
-  //     }
-  //   ]
-  // })
-
-  // }, [])
+  
 
   const togglePopOver = () => {
     setIsShowPopFilter((prev) => !prev);
@@ -161,7 +94,7 @@ const Savings = () => {
   // original data display without search spliting of data into arrays of 10s
 
   useEffect(() => {
-    const temp = [...transactions];
+    const temp = [...tranData];
     const num = Math.ceil(temp.length / 10);
     const newArr = Array.from({ length: num }, () => []);
     for (let i = 0; i < num; i++) {
@@ -169,7 +102,7 @@ const Savings = () => {
         newArr[i].push(temp.shift());
       }
     }
-
+    setPage('savings')
     setDataTab(newArr);
     setCurrPage(newArr[0]);
     setPageNum(Array.from({ length: num }, (_, index) => (index += 1)));
@@ -381,83 +314,29 @@ const Savings = () => {
     );
   }, [selectedCategory]);
 
-  // const dashboardelement = Dataone.map((data, index) => {
-  //   return (
-  //     <div
-  //       key={index}
-  //       className={`flex flex-col bg-white w-[270px] gap-6 h-[170px] p-5  rounded-lg border-r-4
-  //         ${
-  //           data.title === "Income"
-  //             ? "border-green-400"
-  //             : data.title === "Expenses"
-  //             ? "border-red-400"
-  //             : data.title === "Savings"
-  //             ? "border-yellow-400"
-  //             : "border-blue-400"
-  //         }`}
-  //     >
+  
 
-  //       <div
-  //         className={`flex w-10 h-10 border rounded-lg items-center justify-center
-  //         ${
-  //           data.title === "Income"
-  //             ? " bg-green-100"
-  //             : data.title === "Expenses"
-  //             ? "bg-red-100"
-  //             : data.title === "Savings"
-  //             ? " bg-yellow-100 "
-  //             : " bg-blue-100 "
-  //         }`}
-  //       >
-  //         {iconMapping[data.icon]}
-  //       </div>
-
-  //       <div className="flex justify-between items-center">
-  //         <div className="flex flex-col">
-  //           <span className=" font-title font-bold text-lg">{data.title}</span>
-  //           <span className=" font-sans font-black text-lg">{data.amount}</span>
-  //         </div>
-  //         <div
-  //           className={`flex justify-center text-lg  items-center border rounded-full w-20 h-8
-  //         ${
-  //           data.title === "Income"
-  //             ? "text-green-500 bg-green-100"
-  //             : data.title === "Expenses"
-  //             ? "text-red-500 bg-red-100"
-  //             : data.title === "Savings"
-  //             ? "text-yellow-500 bg-yellow-100"
-  //             : "text-blue-500 bg-blue-100"
-  //         }
-  //         `}
-  //         >
-  //           {data.percentage}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // });
-
-  const dashboardelement = Dataone.map((data, index) => {
-    return (
-      <TransCard
-        key={index}
-        title={data.title}
-        amount={data.amount}
-        percent={data.percentage}
-        icon={data.icon}
-        gain={data.gains}
+  const dashboardelement = 
+  
+  <TransCard
+        key={Dataone[1]}
+        title={Dataone[1].title}
+        amount={Dataone[1].amount}
+        percent={Dataone[1].percentage}
+        icon={Dataone[1].icon}
+        gain={Dataone[1].gains}
         colr={
-          data.title === "Balance"
+          Dataone[1].title === "Balance"
             ? "blue"
-            : data.title === "Income"
+            : Dataone[1].title === "Income"
             ? "green"
-            : data.title === "Expenses"
+            : Dataone[1].title === "Expenses"
             ? "red"
             : "yellow"
         }
       />
-    );
-  });
+  
+
 
   const onlySearchQuery = debouncedQuery === "" ? currPage : FilPage;
   const searchQueryAndDate = isDateFiltered
@@ -555,10 +434,10 @@ const Savings = () => {
       <div className="flex p-6 ">
         <div className="flex flex-col gap-1 ">
           <div className="font-body font-bold text-3xl text-textcol">
-            Dashboard
+            Expense
           </div>
           <div className="font-body text-xs">
-            An overview of the entire accounting System
+            An overview of the Your Expenses
           </div>
         </div>
       </div>
@@ -571,61 +450,17 @@ const Savings = () => {
       <div className="flex  flex-col items-center justify-center  bg-back gap-7 px-6 ">
         <div className="flex flex-col md:flex md:flex-row w-full gap-8">{dashboardelement}</div>
 
-        {/* <div className="flex flex-col gap-0 w-[59rem] ">
-         <div className="flex flex-col p-2">
-          <div className='flex justify-between pr-10'><h3 className="text-xl font-bold">Statistics</h3> <div>Month</div></div> 
-          
-          
-          
-           <div className="flex gap-6 mt-2"> 
-            
-            <div className="flex items-center justify-center gap-1 align-middle">
-              <div className="w-3 h-3 bg-yellow-500  rounded-full flex justify-center items-center "></div>
-             
-              <div className="text-gray-400" >
-               Income
-              </div>
-               
-               </div>
-               
-               
-                <span className="flex items-center justify-center gap-1" >
-                <span className="w-3 h-3 bg-red-500  rounded-full"></span>
-                <div className="text-gray-400" >  Expenses </div>
-                  
-                  </span> 
-                
-                
-                
-                <span className="flex items-center justify-center gap-1">
-                <span className="w-3 h-3 bg-green-500  rounded-full"></span>
-
-                <div className="text-gray-400" >
-                  Savings </div>
-                  
-                  </span>
-                  </div>
-         </div>
-
-          <div className="flex">
-          <LineChart  
-          chartsData={chartsData}
-          dataTab={Tabledata}
-          setIncomeGraphData={setIncomeGraphData} 
-          setExpenseGraphData={setExpenseGraphData}
-          setSavingsGraphData={setSavingsGraphData}/>
-        </div>
- </div> */}
+      
 
 
 
         <div className="flex flex-col lg:flex-row gap-7 w-full mb-7 ">
           <div className="flex w-full h-auto  lg:w-[70%] lg:h-[480px]">
-            <MultiBar ChartData={ChartData} />
+            <LineChart ChartData={ChartData} page={page}/>
           </div>
 
           <div className="w-full  lg:w-[30%]">
-            <OverviewCard />
+            <MiniOverview page={page} />
           </div>
         </div>
 
@@ -695,6 +530,7 @@ const Savings = () => {
           {isshowPopFilter && (
             <div className="flex  mt-[18rem] ml-[56rem] absolute">
               <PopOver
+                page={page}
                 setIsShowPopFilter={setIsShowPopFilter}
                 isshowPopFilter={isshowPopFilter}
                 setSelectedType={setSelectedType}

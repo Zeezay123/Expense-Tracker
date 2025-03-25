@@ -6,7 +6,7 @@ import * as Progress from "@radix-ui/react-progress";
 import Dataone from "../../Dataone";
 import Tabledata from "../../Tabledata";
 
-const IncomeOverview = () => {
+const MiniOverview = ({page}) => {
   const [option, setOption] = useState('income');
 const [totalAmount, setTotalAmount] = useState('')
 const [topThreeAmount, setTopThreeAmount] = useState([])
@@ -18,14 +18,14 @@ const [threesum, setThreeSum] = useState(120)
 
 
   useEffect(()=>{
-    const type = "income"
-    const briefOverview = (type)=>{
+    
+    const briefOverview = (page)=>{
 
-    type.toLowerCase() == 'expense' ? setColor('#EA4D4D') : setColor('#17C666' )
+    page.toLowerCase() == 'expense' ? setColor('#EA4D4D') : page.toLowerCase() == 'income' ? setColor('#17C666' ): setColor('#FFA21D')
 
 
         const expenseData = Tabledata.filter((datas) => {
-          return datas.type.toLowerCase().includes(type);
+          return datas.type.toLowerCase().includes(page);
         });
       
         const catgs = expenseData.reduce(
@@ -87,8 +87,8 @@ const [threesum, setThreeSum] = useState(120)
 
         // console.log(color)
   
-       briefOverview(option)
-  },[option])
+       briefOverview(page)
+  },[page])
 
   
 // console.log(topThreeAmount)
@@ -168,7 +168,7 @@ const progressBars = topThreeAmount.map((bar,index)=>{
   return (
     <div className="flex flex-col w-[100%] h-[27.5rem] bg-white rounded-md px-4 py-2 shadow-sm">
       <div className="py-4 mb-4 flex items-center justify-between pr-4">
-        <span className="font-body font-bold text-lg"> Brief Overview {firstLCap(option)}</span>
+        <span className="font-body font-bold text-lg"> Brief Overview {firstLCap(page)}</span>
 
         
       </div>
@@ -179,7 +179,8 @@ const progressBars = topThreeAmount.map((bar,index)=>{
 
         <span className={`flex justify-center items-center 
          w-14 h-6 px-3 text-xs font-bold font-sans border-[1px] rounded-sm 
-         ${option.toLowerCase() == 'expense' ? 'bg-expenselight text-expensebar' : 'bg-incomelight text-incomebar'}
+         ${page.toLowerCase() == 'expense' ? 'bg-expenselight text-expensebar' :
+          page.toLowerCase() == 'income' ?'bg-incomelight text-incomebar': 'bg-savingslight text-savingsbar'}
          `}>
 
 
@@ -188,7 +189,8 @@ const progressBars = topThreeAmount.map((bar,index)=>{
       </div>
 
       <div className="flex items-center">
-        <span className={`font-body font-extrabold text-xs mr-1 ${option.toLowerCase() == 'expense'? 'text-expensebar': 'text-incomebar' }`}>
+        <span className={`font-body font-extrabold text-xs mr-1 ${page.toLowerCase() == 'expense'? 'text-expensebar': 
+           page.toLowerCase() == 'income' ? 'text-incomebar': 'text-savingsbar' }`}>
           ${addComma(threesum.toFixed(2))}
         </span>
         <span className="font-body  text-xs text-gray-400">
@@ -205,4 +207,4 @@ const progressBars = topThreeAmount.map((bar,index)=>{
   );
 };
 
-export default IncomeOverview;
+export default MiniOverview;

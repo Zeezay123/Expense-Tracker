@@ -54,13 +54,7 @@ const Dashboard = () => {
   const [transactions, setTransaction] = useState(Tabledata);
   const [isShowAddTrans, setIsShowAddTrans] = useState(false);
 
-  const [incomeGraphData, setIncomeGraphData] = useState([100, 200, 300]);
-  const [expenseGraphData, setExpenseGraphData] = useState([
-    200, 400, 400, 700,
-  ]);
-  const [savingsGraphData, setSavingsGraphData] = useState([
-    300, 500, 600, 800, 900,
-  ]);
+  const [page, setPage] = useState('All')
 
 
 
@@ -72,68 +66,7 @@ const Dashboard = () => {
   };
 
 
-  // const [chartsData, setChartData] = useState({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-  //     datasets:[
-  //       {
-  //         label: 'Income Spendings',
-  //         data:incomeGraphData,
-  //         backgroundColor: 'yellow',
-  //         borderColor:'yellow',
-  //         tension:0.5
-  //       },
-
-  //       {
-  //         label: 'Expense Spendings',
-  //         data:expenseGraphData,
-  //         backgroundColor: 'red',
-  //         borderColor:'red',
-  //         tension:0.5
-  //       },
-
-  //       {
-  //         label: 'Saving Spendings',
-  //         data:savingsGraphData,
-  //         backgroundColor: 'green',
-  //         borderColor:'green',
-  //         tension:0.5
-
-  //       }
-  //     ]
-  //   })
-
-  // useEffect(() => {
-
-  // setChartData({labels:['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] ,
-  //   datasets:[
-  //     {
-  //       label: 'Income',
-  //       data:incomeGraphData.flat(),
-  //       backgroundColor: 'yellow',
-  //       borderColor:'yellow',
-  //       tension:0.5
-  //     },
-
-  //     {
-  //       label: 'Expense',
-  //       data:expenseGraphData.flat(),
-  //       backgroundColor: 'red',
-  //           borderColor:'red',
-  //           tension:0.5
-
-  //     },
-
-  //     {
-  //       label: 'Saving',
-  //       data:savingsGraphData.flat(),
-  //       backgroundColor: 'green',
-  //       borderColor:'green',
-  //       tension:0.5
-
-  //     }
-  //   ]
-  // })
-
-  // }, [])
+  
 
   const togglePopOver = () => {
     setIsShowPopFilter((prev) => !prev);
@@ -694,7 +627,8 @@ const Dashboard = () => {
           </div>
           {isshowPopFilter && (
             <div className="flex  mt-[18rem] ml-[56rem] absolute">
-              <PopOver
+              <PopOver 
+                page={page}
                 setIsShowPopFilter={setIsShowPopFilter}
                 isshowPopFilter={isshowPopFilter}
                 setSelectedType={setSelectedType}
